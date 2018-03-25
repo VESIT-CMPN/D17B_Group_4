@@ -1,0 +1,32 @@
+1. Install Tripwire using following command
+sudo apt-get update
+sudo apt-get install tripwire
+
+2. Setup site key and local key
+
+3. Create the policy file using following command
+sudo twadmin --create-polfile /etc/tripwire/twpol.txt
+
+4. Initialize the database using following command
+sudo tripwire --init
+
+5. Configure the Policy File to Match Your System
+sudo nano /etc/tripwire/twpol.txt
+
+Implement it by recreating the encrypted policy file that tripwire actually reads
+sudo twadmin -m P /etc/tripwire/twpol.txt
+
+Reinitialize the database to implement our policy
+sudo tripwire --init
+
+6. Verify the Configuration
+sudo tripwire --check
+
+In order to save the changes made by you, run following command and save the file
+sudo tripwire --check --interactive
+
+7. Install mailutils using following command
+sudo apt-get install mailutils
+
+8. To send the logfiles to your email, run the following command
+sudo tripwire --check | mail -s "Tripwire report for `uname -n`" your_email@domain.com
